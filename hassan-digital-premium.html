@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hassan Digital - Agence digitale premium à Abidjan</title>
+  <meta name="description" content="Hassan Digital crée des sites web, tableaux de bord IA, portfolios, sites institutionnels et solutions digitales sur mesure." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#fffaf1;
+      --white:#ffffff;
+      --ink:#081a33;
+      --navy:#071d3d;
+      --blue:#0f5f9f;
+      --gold:#c8942e;
+      --green:#18a86b;
+      --coral:#ef745f;
+      --aqua:#3bbdc4;
+      --muted:#627184;
+      --line:rgba(8,26,51,.12);
+      --soft:#f4ead9;
+      --shadow:0 28px 78px rgba(8,26,51,.14);
+      --shadow-sm:0 16px 38px rgba(8,26,51,.10);
+      --radius:8px;
+      --nav-h:76px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Manrope",system-ui,-apple-system,Segoe UI,sans-serif;
+      background:var(--paper);
+      color:var(--ink);
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+    body.modal-open{overflow:hidden}
+    img,video{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    .icon{width:1.05em;height:1.05em;display:inline-block;vertical-align:-.18em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+    .nav{
+      height:var(--nav-h);
+      position:fixed;
+      inset:0 0 auto;
+      z-index:60;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 clamp(18px,4vw,64px);
+      background:rgba(255,250,241,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(8,26,51,.08);
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:0}
+    .brand-logo{
+      width:48px;
+      height:48px;
+      border-radius:8px;
+      object-fit:cover;
+      background:var(--navy);
+      box-shadow:0 12px 28px rgba(8,26,51,.16);
+      border:1px solid rgba(200,148,46,.45);
+    }
+    .brand small{display:block;color:var(--gold);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;margin-top:2px}
+    .nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+    .nav-link{
+      border:0;
+      background:transparent;
+      color:rgba(8,26,51,.68);
+      padding:11px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:.88rem;
+      transition:background .2s,color .2s,box-shadow .2s;
+    }
+    .nav-link:hover,.nav-link.active{background:#fff;color:var(--ink);box-shadow:0 10px 24px rgba(8,26,51,.07)}
+    .nav-cta{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--ink);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:8px;
+      font-weight:850;
+      box-shadow:0 16px 32px rgba(8,26,51,.18);
+    }
+    .menu{
+      display:none;
+      width:42px;
+      height:42px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--ink);
+      border-radius:8px;
+      place-items:center;
+      cursor:pointer;
+    }
+
+    .section{padding:clamp(70px,8vw,118px) clamp(18px,4vw,64px)}
+    .section-inner{max-width:1240px;margin:0 auto}
+    .section-head{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(260px,430px);
+      gap:28px;
+      align-items:end;
+      margin-bottom:36px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--gold);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+      font-size:.73rem;
+      margin-bottom:16px;
+    }
+    .kicker:before{content:"";width:30px;height:2px;background:currentColor}
+    h1,h2,h3{font-family:"Syne",sans-serif;letter-spacing:0;text-wrap:balance;overflow-wrap:break-word}
+    h1{font-size:clamp(2.55rem,5.2vw,6rem);line-height:.94;max-width:950px}
+    h2{font-size:clamp(2rem,4.5vw,5rem);line-height:.98}
+    h3{font-size:clamp(1.35rem,2vw,2rem);line-height:1.08}
+    .lead{font-size:clamp(1rem,1.22vw,1.16rem);line-height:1.75;color:var(--muted)}
+    .accent{color:var(--gold)}
+
+    .btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
+    .btn{
+      border:0;
+      border-radius:8px;
+      padding:14px 18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      cursor:pointer;
+      font-weight:900;
+      transition:transform .2s,box-shadow .2s,background .2s,color .2s;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .btn-primary{background:var(--ink);color:#fff}
+    .btn-gold{background:var(--gold);color:#111}
+    .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+
+    .hero{
+      min-height:calc(100svh - 42px);
+      padding:calc(var(--nav-h) + 28px) clamp(18px,4vw,64px) 30px;
+      display:grid;
+      align-items:center;
+      background:
+        linear-gradient(90deg,rgba(255,250,241,1) 0%,rgba(255,250,241,.9) 55%,rgba(255,250,241,.56) 100%),
+        linear-gradient(135deg,#fffaf1 0%,#e8f6f8 52%,#fff1cf 100%);
+    }
+    .hero-grid{
+      width:100%;
+      max-width:1420px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1.04fr) minmax(360px,.96fr);
+      gap:clamp(32px,5vw,76px);
+      align-items:center;
+    }
+    .hero-badge{
+      width:max-content;
+      max-width:100%;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 12px;
+      border:1px solid rgba(10,42,74,.14);
+      border-radius:8px;
+      background:rgba(255,255,255,.76);
+      color:var(--navy);
+      font-weight:900;
+      font-size:.82rem;
+      margin-bottom:22px;
+      box-shadow:0 14px 34px rgba(8,26,51,.07);
+    }
+    .hero-badge span{width:9px;height:9px;border-radius:99px;background:var(--green);box-shadow:0 0 0 6px rgba(24,168,107,.12)}
+    .hero-copy .lead{max-width:760px;margin-top:22px}
+    .hero-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:34px;max-width:720px}
+    .proof-card{
+      background:#fff;
+      border:1px solid rgba(8,26,51,.1);
+      border-radius:8px;
+      padding:15px;
+      min-height:106px;
+      transition:transform .22s,box-shadow .22s,border-color .22s;
+    }
+    .proof-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-sm);border-color:rgba(200,148,46,.45)}
+    .proof-num{font-family:"Syne",sans-serif;font-weight:900;font-size:clamp(1.65rem,2.3vw,2.4rem);color:var(--navy)}
+    .proof-label{color:var(--muted);font-weight:750;font-size:.82rem;line-height:1.35;margin-top:6px}
+
+    .promo-carousel{
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(320px,.88fr);
+      gap:clamp(22px,3vw,44px);
+      align-items:center;
+      padding:22px;
+      border-radius:8px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(8,26,51,.1);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .promo-carousel:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 18%,rgba(59,189,196,.16),transparent 34%),
+        radial-gradient(circle at 82% 74%,rgba(200,148,46,.20),transparent 34%);
+      pointer-events:none;
+    }
+    .promo-media,.promo-copy{position:relative;z-index:1}
+    .promo-media{
+      border-radius:8px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.72);
+      background:var(--navy);
+      box-shadow:0 26px 70px rgba(8,26,51,.20);
+    }
+    .promo-media video,
+    .promo-image,
+    .media-slide img,
+    .media-slide video{
+      width:100%;
+      height:clamp(310px,43vw,570px);
+      object-fit:cover;
+      background:var(--navy);
+    }
+    .promo-media.image-frame{background:linear-gradient(135deg,#fff 0%,#f7efe0 52%,#eaf7f8 100%)}
+    .promo-media.image-frame .promo-image{
+      object-fit:contain;
+      padding:clamp(10px,1.5vw,18px);
+      animation:imageFloat 7s infinite ease-in-out;
+      filter:drop-shadow(0 18px 32px rgba(8,26,51,.16));
+    }
+    @keyframes imageFloat{
+      0%,100%{transform:scale(.985) translateY(0)}
+      50%{transform:scale(1.015) translateY(-8px)}
+    }
+    .media-carousel{
+      position:relative;
+      min-height:clamp(310px,43vw,570px);
+      border-radius:8px;
+      overflow:hidden;
+    }
+    .media-slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transform:scale(.985);
+      animation:mediaFade 12s infinite ease-in-out;
+    }
+    .media-slide:nth-child(2){animation-delay:6s}
+    .media-slide img{
+      object-fit:contain;
+      padding:clamp(10px,1.5vw,18px);
+      filter:drop-shadow(0 18px 32px rgba(8,26,51,.16));
+    }
+    .media-slide video{object-fit:cover}
+    @keyframes mediaFade{
+      0%,8%{opacity:0;transform:scale(.985) translateY(10px)}
+      13%,45%{opacity:1;transform:scale(1) translateY(0)}
+      52%,100%{opacity:0;transform:scale(1.015) translateY(-10px)}
+    }
+    .promo-copy{min-height:360px;display:grid;align-content:center;min-width:0}
+    .promo-logo{width:66px;height:66px;border-radius:8px;object-fit:cover;margin-bottom:24px;box-shadow:0 16px 34px rgba(8,26,51,.16)}
+    .promo-label{font-weight:900;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-size:.72rem;margin-bottom:14px}
+    .promo-slides{display:grid;position:relative;min-height:250px;min-width:0}
+    .promo-slide{
+      grid-area:1/1;
+      opacity:0;
+      transform:translateY(16px);
+      animation:copySlide 15s infinite ease-in-out;
+    }
+    .promo-slide:nth-child(2){animation-delay:5s}
+    .promo-slide:nth-child(3){animation-delay:10s}
+    .promo-slide h2{font-size:clamp(1.75rem,3vw,3.8rem);max-width:100%;hyphens:auto;overflow-wrap:anywhere}
+    .promo-slide p{margin-top:18px}
+    @keyframes copySlide{
+      0%,7%{opacity:0;transform:translateY(18px)}
+      12%,30%{opacity:1;transform:translateY(0)}
+      38%,100%{opacity:0;transform:translateY(-14px)}
+    }
+    .promo-dots{display:flex;gap:7px;margin-top:18px}
+    .promo-dots span{width:28px;height:4px;border-radius:99px;background:rgba(8,26,51,.15);overflow:hidden}
+    .promo-dots span:before{content:"";display:block;height:100%;width:0;background:linear-gradient(90deg,var(--aqua),var(--gold));animation:dotFill 15s infinite linear}
+    .promo-dots span:nth-child(2):before{animation-delay:5s}
+    .promo-dots span:nth-child(3):before{animation-delay:10s}
+    @keyframes dotFill{0%,32%{width:0}33%,66%{width:100%}67%,100%{width:0}}
+
+    .hero .promo-carousel{padding:18px;grid-template-columns:minmax(220px,.78fr) minmax(280px,1fr)}
+    .hero .promo-media video,.hero .promo-image{height:clamp(330px,41vw,580px)}
+    .hero .media-carousel{min-height:clamp(330px,41vw,580px)}
+    .hero .promo-copy{min-height:350px}
+    .hero .promo-slide h2{font-size:clamp(1.65rem,2.65vw,3.35rem)}
+
+    .marquee{background:var(--ink);color:#fff;overflow:hidden;border-block:1px solid rgba(255,255,255,.18)}
+    .marquee-track{
+      display:flex;
+      gap:36px;
+      width:max-content;
+      padding:18px 0;
+      animation:marquee 28s linear infinite;
+      font-family:"Syne",sans-serif;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+    }
+    .marquee-track span{display:flex;align-items:center;gap:18px;color:#fff}
+    .marquee-track i{width:7px;height:7px;border-radius:99px;background:var(--gold);display:block}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+
+    .service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .service-card{
+      background:#fff;
+      border:1px solid rgba(8,26,51,.1);
+      border-radius:8px;
+      padding:22px;
+      min-height:330px;
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      transition:transform .22s,box-shadow .22s,border-color .22s;
+    }
+    .service-card:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(200,148,46,.16),transparent 40%);
+      opacity:0;
+      transition:opacity .2s;
+      pointer-events:none;
+    }
+    .service-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-sm);border-color:rgba(200,148,46,.45)}
+    .service-card:hover:before{opacity:1}
+    .service-card.featured{background:linear-gradient(140deg,#fff 0%,#fff7e6 48%,#e9f8f5 100%)}
+    .card-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;position:relative;z-index:1}
+    .card-icon{
+      width:46px;
+      height:46px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      color:var(--navy);
+      background:#f3ead8;
+      border:1px solid rgba(200,148,46,.25);
+      flex:0 0 auto;
+    }
+    .chip{font-size:.72rem;font-weight:900;color:var(--navy);background:#edf7f6;border:1px solid rgba(59,189,196,.28);padding:7px 9px;border-radius:8px;white-space:nowrap}
+    .service-card h3{margin-top:24px;position:relative;z-index:1}
+    .service-card p{color:var(--muted);line-height:1.65;margin-top:12px;position:relative;z-index:1}
+    .card-footer{margin-top:auto;padding-top:30px;display:flex;justify-content:space-between;align-items:center;color:var(--gold);font-weight:900;font-size:.86rem;position:relative;z-index:1}
+
+    .showcase-band{background:#fff;border-block:1px solid rgba(8,26,51,.08)}
+    .showcase-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:42px;align-items:center}
+    .image-rail{position:relative;min-height:570px}
+    .rail-img{
+      position:absolute;
+      overflow:hidden;
+      border-radius:8px;
+      border:1px solid rgba(8,26,51,.1);
+      box-shadow:var(--shadow-sm);
+      transition:transform .35s,filter .35s;
+      background:#fff;
+    }
+    .rail-img:hover{transform:translateY(-8px) scale(1.015);filter:saturate(1.08)}
+    .rail-img img{width:100%;height:100%;object-fit:cover}
+    .rail-img.a{left:0;top:0;width:58%;height:52%}
+    .rail-img.b{right:0;top:78px;width:52%;height:46%}
+    .rail-img.c{left:10%;bottom:0;width:66%;height:43%}
+    .feature-list{display:grid;gap:12px;margin-top:30px}
+    .feature-card{
+      background:var(--paper);
+      border:1px solid rgba(8,26,51,.1);
+      border-radius:8px;
+      padding:18px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:14px;
+      align-items:center;
+      transition:transform .2s,background .2s,border-color .2s;
+    }
+    .feature-card:hover{transform:translateX(8px);background:#fff;border-color:rgba(200,148,46,.4)}
+    .feature-index{font-family:"Syne",sans-serif;color:var(--gold);font-weight:900}
+    .feature-card strong{display:block;margin-bottom:3px}
+    .feature-card span{color:var(--muted);font-size:.92rem}
+
+    .ad-break{background:linear-gradient(180deg,#fffaf1 0%,#ffffff 100%)}
+    .ad-break.alt{background:linear-gradient(180deg,#ffffff 0%,#f3fbfb 100%)}
+    .ad-break .promo-carousel{box-shadow:0 24px 60px rgba(8,26,51,.10)}
+
+    .chat-section{background:linear-gradient(180deg,#f7efdf 0%,#fffaf1 100%)}
+    .chat-section h2{font-size:clamp(2rem,3.1vw,3.65rem)}
+    .chat-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(400px,1.08fr);gap:56px;align-items:start}
+    .chat-screen{
+      background:#fff;
+      border:1px solid rgba(8,26,51,.12);
+      border-radius:8px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height:560px;
+    }
+    .chat-top{padding:18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:#fbf7ee}
+    .chat-agent{display:flex;gap:12px;align-items:center}
+    .agent-logo{width:46px;height:46px;border-radius:8px;object-fit:cover;background:var(--navy);box-shadow:0 10px 24px rgba(8,26,51,.12)}
+    .agent-status{font-size:.76rem;color:var(--green);font-weight:900}
+    .chat-body{padding:20px;display:grid;gap:12px;min-height:360px;background:linear-gradient(180deg,#fff,#f7fbfb);overflow:auto}
+    .bubble{max-width:84%;padding:13px 14px;border-radius:8px;line-height:1.5;font-weight:700;font-size:.95rem;box-shadow:0 10px 24px rgba(8,26,51,.06)}
+    .bubble.in{background:#eef3f7;justify-self:start}
+    .bubble.out{background:var(--blue);color:#fff;justify-self:end}
+    .bubble.gold{background:#fff1d1;color:#3a2a06;border:1px solid rgba(200,148,46,.22)}
+    .typing{width:62px;display:flex;gap:5px;align-items:center}
+    .typing i{width:7px;height:7px;border-radius:99px;background:var(--muted);animation:typing 1s infinite ease-in-out}
+    .typing i:nth-child(2){animation-delay:.13s}.typing i:nth-child(3){animation-delay:.26s}
+    @keyframes typing{50%{transform:translateY(-4px);opacity:.45}}
+    .chat-actions{padding:16px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .quick{border:1px solid rgba(8,26,51,.12);background:#fff;border-radius:8px;padding:12px;cursor:pointer;font-weight:900;color:var(--navy)}
+    .quick:hover{border-color:var(--gold);background:#fff8e8}
+    .chat-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px}
+    .metric-card{background:#fff;border:1px solid rgba(8,26,51,.1);border-radius:8px;padding:18px;transition:transform .2s,box-shadow .2s}
+    .metric-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm)}
+    .metric-card b{font-family:"Syne",sans-serif;font-size:2rem;color:var(--gold)}
+    .metric-card span{display:block;color:var(--muted);font-weight:750;margin-top:4px}
+
+    .map-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
+    .map-board{
+      min-height:500px;
+      border:1px solid rgba(8,26,51,.11);
+      border-radius:8px;
+      background:
+        linear-gradient(90deg,rgba(10,42,74,.06) 1px,transparent 1px),
+        linear-gradient(rgba(10,42,74,.06) 1px,transparent 1px),
+        linear-gradient(135deg,#fff 0%,#edf8f8 52%,#fff5df 100%);
+      background-size:48px 48px,48px 48px,auto;
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow-sm);
+    }
+    .map-path{position:absolute;inset:14%;border:2px solid rgba(15,95,159,.22);border-radius:46% 54% 42% 58%;transform:rotate(-13deg)}
+    .pin{
+      position:absolute;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(8,26,51,.11);
+      background:#fff;
+      border-radius:8px;
+      padding:10px 12px;
+      font-weight:900;
+      box-shadow:0 14px 32px rgba(8,26,51,.12);
+      cursor:pointer;
+      transition:transform .2s,background .2s,color .2s;
+    }
+    .pin:hover,.pin.active{transform:translateY(-5px);background:var(--ink);color:#fff}
+    .pin i{width:10px;height:10px;border-radius:99px;background:var(--gold);box-shadow:0 0 0 7px rgba(200,148,46,.15)}
+    .pin.one{left:16%;top:22%}.pin.two{right:16%;top:30%}.pin.three{left:28%;bottom:20%}.pin.four{right:20%;bottom:18%}
+    .location-panel{background:#fff;border:1px solid rgba(8,26,51,.1);border-radius:8px;padding:26px;box-shadow:var(--shadow-sm)}
+    .location-panel h3{margin-bottom:12px}.location-panel p{color:var(--muted);line-height:1.7}
+    .location-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+    .location-tags span{border:1px solid rgba(8,26,51,.1);padding:9px 10px;border-radius:8px;background:#fbf7ee;font-weight:850;color:var(--navy);font-size:.86rem}
+
+    .process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .process-card{
+      background:#fff;
+      border:1px solid rgba(8,26,51,.1);
+      border-radius:8px;
+      padding:20px;
+      min-height:220px;
+      transition:transform .2s,box-shadow .2s,border-color .2s;
+    }
+    .process-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-sm);border-color:rgba(24,168,107,.35)}
+    .process-card b{font-family:"Syne",sans-serif;color:var(--green);font-size:2rem}
+    .process-card h3{font-size:1.18rem;margin-top:18px}
+    .process-card p{color:var(--muted);line-height:1.6;margin-top:10px;font-size:.92rem}
+
+    .contact-band{background:var(--ink);color:#fff}
+    .contact-band .kicker,.contact-band h2{color:#fff}
+    .contact-band .lead{color:rgba(255,255,255,.72)}
+    .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:start}
+    .contact-list{display:grid;gap:12px}
+    .contact-card{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      border-radius:8px;
+      padding:18px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      transition:background .2s,transform .2s;
+    }
+    .contact-card:hover{background:rgba(255,255,255,.14);transform:translateX(7px)}
+    .contact-ico{width:42px;height:42px;border-radius:8px;display:grid;place-items:center;background:rgba(200,148,46,.18);color:#ffd17a;flex:0 0 auto}
+    .contact-card span:not(.contact-ico){display:block;color:rgba(255,255,255,.58);font-size:.82rem;font-weight:850;margin-bottom:2px}
+    .contact-card strong{font-size:1rem;word-break:break-word}
+    .contact-form{
+      background:#fff;
+      color:var(--ink);
+      border-radius:8px;
+      padding:22px;
+      border:1px solid rgba(255,255,255,.18);
+      display:grid;
+      gap:12px;
+      box-shadow:0 28px 80px rgba(0,0,0,.18);
+    }
+    .form-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    label{display:block;font-size:.78rem;font-weight:900;color:var(--navy);margin-bottom:7px}
+    input,textarea,select{
+      width:100%;
+      border:1px solid rgba(8,26,51,.14);
+      border-radius:8px;
+      background:#fbf7ee;
+      color:var(--ink);
+      padding:13px 12px;
+      outline:none;
+      transition:border-color .2s,background .2s,box-shadow .2s;
+    }
+    textarea{min-height:136px;resize:vertical}
+    input:focus,textarea:focus,select:focus{background:#fff;border-color:var(--gold);box-shadow:0 0 0 4px rgba(200,148,46,.14)}
+
+    footer{padding:28px clamp(18px,4vw,64px);background:#081421;color:rgba(255,255,255,.7)}
+    .footer-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:14px;flex-wrap:wrap}
+    .footer-links button{border:0;background:transparent;color:rgba(255,255,255,.78);cursor:pointer;font-weight:850}
+
+    .whatsapp-float{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:70;
+      width:64px;
+      height:64px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:#20c366;
+      color:#fff;
+      box-shadow:0 20px 46px rgba(32,195,102,.34);
+      border:1px solid rgba(255,255,255,.55);
+      animation:floatButton 3s infinite ease-in-out;
+    }
+    .whatsapp-float:before{content:"";position:absolute;inset:-7px;border:1px solid rgba(32,195,102,.45);border-radius:22px;animation:ring 1.8s infinite ease}
+    @keyframes floatButton{50%{transform:translateY(-7px)}}@keyframes ring{to{transform:scale(1.18);opacity:0}}
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:28px;
+      transform:translate(-50%,22px);
+      z-index:90;
+      background:var(--ink);
+      color:#fff;
+      border-radius:8px;
+      padding:12px 14px;
+      font-weight:850;
+      opacity:0;
+      pointer-events:none;
+      transition:.25s;
+    }
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:80;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(8,20,33,.55);
+      backdrop-filter:blur(10px);
+    }
+    .modal.open{display:flex}
+    .modal-panel{
+      width:min(980px,100%);
+      max-height:90svh;
+      overflow:auto;
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 34px 100px rgba(0,0,0,.28);
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      border:1px solid rgba(255,255,255,.7);
+    }
+    .modal-aside{padding:26px;background:linear-gradient(145deg,#102b49,#0f5f9f);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+    .modal-main{padding:28px;display:grid;gap:18px}
+    .modal-close{width:42px;height:42px;border:0;border-radius:8px;background:#f3ead8;color:var(--ink);cursor:pointer;justify-self:end;font-weight:900}
+    .modal-list{display:grid;gap:10px}
+    .modal-list li{list-style:none;display:flex;gap:10px;color:var(--muted);line-height:1.55}
+    .modal-list li svg{color:var(--green);flex:0 0 auto;margin-top:3px}
+
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:1280px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-proof{display:none}
+      .hero .promo-carousel{max-width:880px;margin-inline:auto}
+      .hero .promo-slide h2{font-size:clamp(1.9rem,4vw,3.2rem)}
+    }
+    @media(max-width:1180px){
+      .service-grid{grid-template-columns:repeat(2,1fr)}
+      .showcase-grid,.chat-grid,.map-grid,.contact-grid{grid-template-columns:1fr}
+      .process-grid{grid-template-columns:repeat(2,1fr)}
+      .section-head{grid-template-columns:1fr}
+    }
+    @media(max-width:860px){
+      .nav-links{
+        position:absolute;
+        top:var(--nav-h);
+        left:12px;
+        right:12px;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:8px;
+        padding:10px;
+        box-shadow:var(--shadow-sm);
+      }
+      .nav-links.open{display:flex}
+      .menu{display:grid}
+      .nav-cta{display:none}
+      .hero{padding-top:calc(var(--nav-h) + 20px)}
+      .hero-grid{gap:22px}
+      .promo-carousel,.hero .promo-carousel{grid-template-columns:1fr;padding:16px}
+      .promo-copy{min-height:260px}
+      .promo-media video,.promo-image,.media-slide img,.media-slide video,.hero .promo-media video,.hero .promo-image{height:clamp(290px,88vw,440px)}
+      .media-carousel,.hero .media-carousel{min-height:clamp(290px,88vw,440px)}
+      .promo-slide h2,.hero .promo-slide h2{font-size:clamp(1.9rem,9vw,3rem)}
+      .service-card.featured{grid-column:auto}
+      .chat-actions,.chat-metrics,.form-row{grid-template-columns:1fr}
+      .image-rail{min-height:500px}
+      .rail-img.a{width:72%;height:42%}.rail-img.b{width:62%;height:36%;top:112px}.rail-img.c{width:78%;height:38%}
+      .map-board{min-height:430px}
+      .pin{font-size:.8rem;padding:8px}
+      .modal-panel{grid-template-columns:1fr}
+      .whatsapp-float{width:58px;height:58px;right:14px;bottom:14px}
+    }
+    @media(max-width:560px){
+      h1{font-size:clamp(2.25rem,10.8vw,3.05rem)}
+      .section{padding-block:62px}
+      .service-grid,.process-grid{grid-template-columns:1fr}
+      .brand span:last-child{font-size:.95rem}
+      .brand-logo{width:44px;height:44px}
+      .btn{width:100%;padding:12px 13px}
+      .hero-badge{font-size:.76rem}
+      .hero-copy .lead{font-size:.96rem;line-height:1.58}
+      .promo-logo{width:58px;height:58px;margin-bottom:18px}
+      .promo-slides{min-height:255px}
+      .feature-card{grid-template-columns:auto 1fr}
+      .feature-card>svg{display:none}
+      .chat-screen{min-height:520px}
+    }
+    @media(min-width:1600px){
+      .section-inner,.hero-grid{max-width:1560px}
+      .service-card{min-height:310px}
+      .hero .promo-media video{height:640px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+      .promo-slide:first-child{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-8 8H7l-4 2 1.5-4.5A8 8 0 1 1 21 12Z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></symbol>
+    <symbol id="i-site" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 15h8"/></symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8h3v8H8zM14 8h2M14 12h4M14 16h3"/></symbol>
+    <symbol id="i-design" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+    <symbol id="i-learn" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M4 5.5v16M8 8h8M8 12h6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 5-2 1.5a11 11 0 0 0 5.5 5.5L16 13l5 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  </svg>
+
+  <nav class="nav">
+    <a class="brand" href="#accueil" aria-label="Hassan Digital">
+      <img class="brand-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital">
+      <span>Hassan Digital <small>Abidjan</small></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><button class="nav-link active" data-nav="accueil">Accueil</button></li>
+      <li><button class="nav-link" data-nav="services">Services</button></li>
+      <li><button class="nav-link" data-nav="chat">Chat</button></li>
+      <li><button class="nav-link" data-nav="zones">Zones</button></li>
+      <li><button class="nav-link" data-nav="contact">Contact</button></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/2250715484049?text=Bonjour%20Hassan%20Digital%2C%20je%20souhaite%20un%20devis." target="_blank" rel="noopener"><svg class="icon"><use href="#i-msg"/></svg> WhatsApp</a>
+    <button class="menu" id="menuBtn" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </nav>
+
+  <main>
+    <header class="hero" id="accueil">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="hero-badge"><span></span> Agence digitale premium en Côte d'Ivoire</div>
+          <h1>Votre marque mérite un digital <span class="accent">haut de gamme.</span></h1>
+          <p class="lead">Hassan Digital crée des sites web, assistants WhatsApp, tableaux de bord et identités visuelles qui donnent à votre entreprise une présence nette, crédible et mémorable.</p>
+          <div class="btn-row">
+            <button class="btn btn-primary" data-scroll="services">Explorer les services <svg class="icon"><use href="#i-arrow"/></svg></button>
+            <a class="btn btn-gold" href="https://wa.me/2250715484049?text=Bonjour%20Hassan%20Digital%2C%20je%20veux%20un%20site%20premium." target="_blank" rel="noopener">Demander un devis</a>
+            <button class="btn btn-ghost" data-scroll="chat">Voir le chat</button>
+          </div>
+          <div class="hero-proof" aria-label="Chiffres clés">
+            <div class="proof-card"><div class="proof-num" data-count="50" data-suffix="+">0</div><div class="proof-label">projets et supports digitaux livrés</div></div>
+            <div class="proof-card"><div class="proof-num" data-count="24" data-suffix="/7">0</div><div class="proof-label">réponse client automatisée</div></div>
+            <div class="proof-card"><div class="proof-num" data-count="100" data-suffix="%">0</div><div class="proof-label">responsive mobile, tablette, ordinateur, TV</div></div>
+          </div>
+        </div>
+
+        <section class="promo-carousel reveal" aria-label="Carousel publicitaire sites préfabriqués">
+          <div class="promo-media">
+            <video src="assets/hassan-prefab-sites-new.mp4" autoplay muted loop playsinline poster="assets/hassan-dashboard-prefab-image.jpeg"></video>
+          </div>
+          <div class="promo-copy">
+            <img class="promo-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital">
+            <div class="promo-label">Carousel publicitaire 01</div>
+            <div class="promo-slides">
+              <article class="promo-slide"><h2>Sites web préfabriqués.</h2><p class="lead">Des plateformes commerciales propres, rapides à déployer et pensées pour vendre plus vite.</p></article>
+              <article class="promo-slide"><h2>Un site prêt à convaincre.</h2><p class="lead">Catalogue, présentation, contact WhatsApp, pages services et structure responsive.</p></article>
+              <article class="promo-slide"><h2>Pour PME ambitieuses.</h2><p class="lead">Une solution claire pour lancer une présence digitale sérieuse sans perdre de temps.</p></article>
+            </div>
+            <div class="promo-dots"><span></span><span></span><span></span></div>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Sites web commerciaux <i></i> Assistant WhatsApp <i></i> Tableaux de bord IA <i></i> Identité visuelle <i></i> Portfolios <i></i> Solutions innovantes <i></i></span>
+        <span>Sites web commerciaux <i></i> Assistant WhatsApp <i></i> Tableaux de bord IA <i></i> Identité visuelle <i></i> Portfolios <i></i> Solutions innovantes <i></i></span>
+      </div>
+    </div>
+
+    <section class="section" id="services">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Services interactifs</div>
+            <h2>Des cartes propres, lisibles et cliquables.</h2>
+          </div>
+          <p class="lead">Chaque service ouvre un écran de détail. Les cartes respirent mieux, les textes ne se chevauchent pas, et l'ensemble reste confortable sur téléphone, tablette et ordinateur.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card featured reveal" data-service="whatsapp">
+            <div class="card-top"><div class="card-icon"><svg class="icon"><use href="#i-msg"/></svg></div><span class="chip">Signature</span></div>
+            <h3>Assistant WhatsApp intelligent</h3>
+            <p>Réception, tri, réponse, qualification, devis suggéré et relance de prospects, même quand l'équipe est occupée.</p>
+            <div class="card-footer"><span>Voir le détail</span><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </article>
+          <article class="service-card featured reveal" data-service="web">
+            <div class="card-top"><div class="card-icon"><svg class="icon"><use href="#i-site"/></svg></div><span class="chip">Premium</span></div>
+            <h3>Sites web commerciaux</h3>
+            <p>Sites vitrines, e-commerce et pages de vente rapides, élégants, responsives et construits pour convertir.</p>
+            <div class="card-footer"><span>Voir le détail</span><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </article>
+          <article class="service-card reveal" data-service="dashboard">
+            <div class="card-top"><div class="card-icon"><svg class="icon"><use href="#i-dashboard"/></svg></div><span class="chip">Pilotage</span></div>
+            <h3>Tableau de bord IA</h3>
+            <p>Une interface claire pour suivre demandes, ventes, contacts, campagnes et activité digitale.</p>
+            <div class="card-footer"><span>Détail</span><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </article>
+          <article class="service-card reveal" data-service="portfolio">
+            <div class="card-top"><div class="card-icon"><svg class="icon"><use href="#i-design"/></svg></div><span class="chip">Image</span></div>
+            <h3>Portfolio & institutionnel</h3>
+            <p>Des sites sobres, élégants et crédibles pour présenter un profil, une structure ou une mission.</p>
+            <div class="card-footer"><span>Détail</span><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </article>
+          <article class="service-card reveal" data-service="design">
+            <div class="card-top"><div class="card-icon"><svg class="icon"><use href="#i-design"/></svg></div><span class="chip">Design</span></div>
+            <h3>Design graphique</h3>
+            <p>Affiches, flyers, visuels réseaux sociaux et système visuel cohérent pour vendre avec style.</p>
+            <div class="card-footer"><span>Détail</span><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </article>
+          <article class="service-card reveal" data-service="formation">
+            <div class="card-top"><div class="card-icon"><svg class="icon"><use href="#i-learn"/></svg></div><span class="chip">Academy</span></div>
+            <h3>Formation digitale</h3>
+            <p>Des sessions pratiques pour apprendre les outils web, design, automatisation et communication digitale.</p>
+            <div class="card-footer"><span>Détail</span><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ad-break" id="dashboard">
+      <div class="section-inner">
+        <div class="promo-carousel reveal" aria-label="Carousel publicitaire tableau de bord IA">
+          <div class="promo-copy">
+            <img class="promo-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital">
+            <div class="promo-label">Carousel publicitaire 02</div>
+            <div class="promo-slides">
+              <article class="promo-slide"><h2>Tableau de bord piloté par IA.</h2><p class="lead">Un système capable de prendre en charge les demandes d'une entreprise ou d'une administration.</p></article>
+              <article class="promo-slide"><h2>Présence continue.</h2><p class="lead">L'administrateur n'a plus besoin d'être disponible 24h/24 pour traiter les demandes courantes.</p></article>
+              <article class="promo-slide"><h2>Suivi clair et moderne.</h2><p class="lead">Messages, priorités, relances et informations importantes restent centralisés.</p></article>
+            </div>
+            <div class="promo-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="promo-media image-frame">
+            <div class="media-carousel">
+              <figure class="media-slide">
+                <img src="assets/hassan-dashboard-whatsapp-image.jpeg" alt="Tableau de bord WhatsApp intelligent Hassan Digital">
+              </figure>
+              <figure class="media-slide">
+                <video src="assets/hassan-dashboard-carousel-video.mp4" autoplay muted loop playsinline poster="assets/hassan-dashboard-whatsapp-image.jpeg"></video>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section showcase-band" id="univers">
+      <div class="section-inner showcase-grid">
+        <div class="image-rail reveal" aria-label="Images Hassan Digital">
+          <figure class="rail-img a"><img src="assets/hassan-digital-site-web.jpeg" alt="Site web commercial Hassan Digital"></figure>
+          <figure class="rail-img b"><img src="assets/hassan-digital-solutions.jpeg" alt="Solutions digitales Hassan Digital"></figure>
+          <figure class="rail-img c"><img src="assets/hassan-digital-agence.jpeg" alt="Agence Hassan Digital"></figure>
+        </div>
+        <div class="reveal">
+          <div class="kicker">Univers Hassan Digital</div>
+          <h2>Une image digitale qui inspire confiance au premier regard.</h2>
+          <p class="lead">L'expérience reste claire, lumineuse et structurée. Les animations donnent du mouvement, mais les espaces blancs gardent une vraie respiration pour que le site ne paraisse pas étouffé.</p>
+          <div class="feature-list">
+            <div class="feature-card"><span class="feature-index">01</span><div><strong>Logo réel partout</strong><span>Navigation, chat, carousels et footer utilisent le logo officiel de l'agence.</span></div><svg class="icon"><use href="#i-arrow"/></svg></div>
+            <div class="feature-card"><span class="feature-index">02</span><div><strong>Carousels séparés</strong><span>Les publicités vidéo sont distribuées dans plusieurs sections du site.</span></div><svg class="icon"><use href="#i-arrow"/></svg></div>
+            <div class="feature-card"><span class="feature-index">03</span><div><strong>Lecture responsive</strong><span>La mise en page garde son standing sur téléphone, tablette, ordinateur et grand écran.</span></div><svg class="icon"><use href="#i-arrow"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section chat-section" id="chat">
+      <div class="section-inner chat-grid">
+        <div class="reveal">
+          <div class="kicker">Écran chat</div>
+          <h2>Un espace conversationnel propre, rapide, rassurant.</h2>
+          <p class="lead">Le chat montre comment Hassan Digital peut aider une boutique, une agence ou une administration à répondre vite sans perdre le ton professionnel.</p>
+          <div class="chat-metrics">
+            <div class="metric-card"><b>3s</b><span>temps de première réponse simulé</span></div>
+            <div class="metric-card"><b>6</b><span>actions: répondre, trier, devis, relance, transfert, suivi</span></div>
+            <div class="metric-card"><b>24h</b><span>disponible pendant et après les heures de bureau</span></div>
+            <div class="metric-card"><b>1</b><span>numéro WhatsApp pour lancer la discussion</span></div>
+          </div>
+        </div>
+        <div class="chat-screen reveal">
+          <div class="chat-top">
+            <div class="chat-agent">
+              <img class="agent-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital">
+              <div><strong>Hassan Digital Concierge</strong><div class="agent-status">En ligne maintenant</div></div>
+            </div>
+            <a class="btn btn-gold" href="https://wa.me/2250715484049?text=Bonjour%20Hassan%20Digital%2C%20je%20veux%20parler%20a%20l'agence." target="_blank" rel="noopener" aria-label="Ouvrir WhatsApp"><svg class="icon"><use href="#i-msg"/></svg></a>
+          </div>
+          <div class="chat-body" id="chatBody">
+            <div class="bubble in">Bonjour, je veux un site propre pour mon activité. Vous pouvez m'aider ?</div>
+            <div class="bubble out">Oui. On peut créer un site premium avec design responsive, pages service, formulaire WhatsApp et animation haut de gamme.</div>
+            <div class="bubble gold">Service détecté: site web commercial. Priorité: conversion + image de marque.</div>
+            <div class="bubble out">Souhaitez-vous plutôt un site vitrine, une boutique en ligne ou une page de vente ?</div>
+          </div>
+          <div class="chat-actions">
+            <button class="quick" data-chat="site">Site web</button>
+            <button class="quick" data-chat="whatsapp">WhatsApp</button>
+            <button class="quick" data-chat="devis">Devis</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ad-break alt" id="solutions">
+      <div class="section-inner">
+        <div class="promo-carousel reveal" aria-label="Carousel publicitaire portfolios et solutions innovantes">
+          <div class="promo-media image-frame">
+            <div class="media-carousel">
+              <figure class="media-slide">
+                <img src="assets/hassan-fama-portfolio.jpeg" alt="Projet FAMA conçu par Hassan Digital">
+              </figure>
+              <figure class="media-slide">
+                <video src="assets/hassan-institutionnel-carousel-video.mp4" autoplay muted loop playsinline poster="assets/hassan-fama-portfolio.jpeg"></video>
+              </figure>
+            </div>
+          </div>
+          <div class="promo-copy">
+            <img class="promo-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital">
+            <div class="promo-label">Carousel publicitaire 03</div>
+            <div class="promo-slides">
+              <article class="promo-slide"><h2>Portfolios premium.</h2><p class="lead">Des interfaces élégantes pour présenter une personne, un parcours, une expertise ou une marque.</p></article>
+              <article class="promo-slide"><h2>Sites institutionnels.</h2><p class="lead">Des plateformes crédibles pour entreprises, administrations, associations et projets publics.</p></article>
+              <article class="promo-slide"><h2>Solutions pour le pays.</h2><p class="lead">Hassan Digital conçoit aussi des solutions innovantes utiles aux organisations et aux communautés.</p></article>
+            </div>
+            <div class="promo-dots"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="zones">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Carte locale</div>
+            <h2>Abidjan comme base, le digital comme terrain.</h2>
+          </div>
+          <p class="lead">Une carte interactive claire met en scène les zones d'intervention et les besoins typiques: commerces, restaurants, cabinets, formations et projets institutionnels.</p>
+        </div>
+        <div class="map-grid">
+          <div class="map-board reveal">
+            <div class="map-path"></div>
+            <button class="pin one active" data-zone="plateau"><i></i> Plateau</button>
+            <button class="pin two" data-zone="cocody"><i></i> Cocody</button>
+            <button class="pin three" data-zone="marcory"><i></i> Marcory</button>
+            <button class="pin four" data-zone="abobo"><i></i> Abobo</button>
+          </div>
+          <aside class="location-panel reveal" id="locationPanel">
+            <h3>Plateau - image corporate</h3>
+            <p>Sites vitrines, dashboards, portfolios professionnels et supports de présentation pour cabinets, consultants et entreprises qui veulent une présence digitale crédible.</p>
+            <div class="location-tags"><span>Sites web</span><span>Dashboard</span><span>Présentation</span><span>Devis rapide</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Méthode</div>
+            <h2>Un parcours simple, mais une exécution très propre.</h2>
+          </div>
+          <p class="lead">Tout est cadré pour que le projet avance vite: cadrage, direction artistique, production, automatisation, livraison et suivi.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-card reveal"><b>01</b><h3>Audit</h3><p>Analyse de votre activité, vos offres, vos clients et vos supports existants.</p></div>
+          <div class="process-card reveal"><b>02</b><h3>Direction</h3><p>Choix des couleurs, typographies, structure de pages et niveau d'interaction.</p></div>
+          <div class="process-card reveal"><b>03</b><h3>Création</h3><p>Production du site, des visuels, du contenu et des cartes interactives.</p></div>
+          <div class="process-card reveal"><b>04</b><h3>Connexion</h3><p>Formulaires, WhatsApp, suivi des demandes et automatisations utiles.</p></div>
+          <div class="process-card reveal"><b>05</b><h3>Lancement</h3><p>Vérification responsive, mise en ligne et accompagnement après livraison.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-band" id="contact">
+      <div class="section-inner">
+        <div class="section-head reveal">
+          <div>
+            <div class="kicker">Contact</div>
+            <h2>On transforme votre idée en présence digitale sérieuse.</h2>
+          </div>
+          <p class="lead">Envoyez votre besoin, le service voulu et votre délai. Le message part directement sur WhatsApp avec les bonnes informations.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-list reveal">
+            <a class="contact-card" href="https://wa.me/2250715484049" target="_blank" rel="noopener"><span class="contact-ico"><svg class="icon"><use href="#i-phone"/></svg></span><div><span>Téléphone / WhatsApp</span><strong>+225 07 15 48 40 49</strong></div></a>
+            <div class="contact-card"><span class="contact-ico"><svg class="icon"><use href="#i-pin"/></svg></span><div><span>Localisation</span><strong>Abidjan, Côte d'Ivoire</strong></div></div>
+            <a class="contact-card" href="mailto:hassandigital54@gmail.com"><span class="contact-ico"><svg class="icon"><use href="#i-mail"/></svg></span><div><span>Email</span><strong>hassandigital54@gmail.com</strong></div></a>
+          </div>
+          <form class="contact-form reveal" id="contactForm">
+            <div class="form-row">
+              <div><label for="fname">Prénom</label><input id="fname" name="fname" autocomplete="given-name" required placeholder="Votre prénom"></div>
+              <div><label for="phone">WhatsApp</label><input id="phone" name="phone" autocomplete="tel" required placeholder="+225 ..."></div>
+            </div>
+            <div><label for="serviceSelect">Service</label><select id="serviceSelect" name="service"><option>Site web préfabriqué</option><option>Assistant WhatsApp intelligent</option><option>Tableau de bord IA</option><option>Portfolio premium</option><option>Site institutionnel</option><option>Design graphique</option><option>Formation digitale</option></select></div>
+            <div><label for="message">Projet</label><textarea id="message" name="message" placeholder="Votre activité, votre objectif, votre délai, votre budget si possible"></textarea></div>
+            <button class="btn btn-primary" type="submit">Envoyer via WhatsApp <svg class="icon"><use href="#i-arrow"/></svg></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="brand"><img class="brand-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital"><span>Hassan Digital <small>Premium digital studio</small></span></div>
+      <div class="footer-links">
+        <button data-scroll="accueil">Accueil</button>
+        <button data-scroll="services">Services</button>
+        <button data-scroll="chat">Chat</button>
+        <button data-scroll="contact">Contact</button>
+      </div>
+      <p>2026 Hassan Digital. Abidjan, Côte d'Ivoire.</p>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/2250715484049?text=Bonjour%20Hassan%20Digital%2C%20je%20souhaite%20parler%20a%20l'agence." target="_blank" rel="noopener" aria-label="Écrire à Hassan Digital sur WhatsApp">
+    <svg class="icon" style="width:30px;height:30px"><use href="#i-msg"/></svg>
+  </a>
+
+  <div class="modal" id="serviceModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <aside class="modal-aside">
+        <div>
+          <div class="kicker" style="color:#ffd17a">Service Hassan Digital</div>
+          <img class="promo-logo" src="assets/hassan-digital-logo.jpeg" alt="Logo Hassan Digital">
+          <h3 id="modalTitle">Service</h3>
+          <p id="modalIntro" style="margin-top:14px;line-height:1.7;color:rgba(255,255,255,.78)"></p>
+        </div>
+        <a class="btn btn-gold" id="modalWhatsapp" href="#" target="_blank" rel="noopener">Demander ce service <svg class="icon"><use href="#i-arrow"/></svg></a>
+      </aside>
+      <div class="modal-main">
+        <button class="modal-close" id="modalClose" aria-label="Fermer"><svg class="icon"><use href="#i-close"/></svg></button>
+        <h3>Ce qui est inclus</h3>
+        <ul class="modal-list" id="modalList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Message prêt</div>
+
+  <script>
+    const serviceData = {
+      whatsapp: {
+        title: "Assistant WhatsApp intelligent",
+        intro: "Un système conversationnel pour ne plus laisser passer les demandes clients importantes.",
+        bullets: ["Réponses automatiques personnalisées", "Qualification des prospects chauds, tièdes et froids", "Devis suggéré selon le besoin du client", "Relances et transfert humain quand la demande devient sensible", "Tableau de suivi des conversations"]
+      },
+      web: {
+        title: "Sites web commerciaux préfabriqués",
+        intro: "Un site lumineux, rapide, élégant et pensé pour transformer vos visiteurs en demandes concrètes.",
+        bullets: ["Direction artistique haut de gamme", "Design responsive téléphone, tablette, ordinateur et TV", "Pages services avec détails au clic", "Bouton WhatsApp flottant et formulaire intelligent", "Optimisation vitesse, clarté et conversion"]
+      },
+      dashboard: {
+        title: "Tableau de bord piloté par IA",
+        intro: "Une interface capable d'aider une entreprise ou une administration à traiter ses demandes sans présence permanente.",
+        bullets: ["Vue des demandes clients", "Suivi des ventes et contacts", "Indicateurs visuels simples", "Gestion multi-utilisateur possible", "Connexion future à WhatsApp, formulaires ou fichiers"]
+      },
+      portfolio: {
+        title: "Portfolio et site institutionnel",
+        intro: "Une présence sobre, crédible et haut de gamme pour présenter une personne, une entreprise ou une mission publique.",
+        bullets: ["Portfolio personnel ou professionnel", "Site institutionnel structuré", "Pages projets et réalisations", "Présentation d'équipe ou de mission", "Design sérieux et responsive"]
+      },
+      design: {
+        title: "Design graphique et visuels",
+        intro: "Des visuels qui donnent une image sérieuse, moderne et reconnaissable à votre marque.",
+        bullets: ["Affiches, flyers et visuels réseaux sociaux", "Palette et typographie cohérentes", "Supports de campagne", "Déclinaisons story, post et bannières", "Fichiers prêts à diffuser"]
+      },
+      formation: {
+        title: "Formation digitale",
+        intro: "Des formations pratiques pour apprendre les outils et réflexes utiles au quotidien.",
+        bullets: ["Création de site web", "Design avec outils modernes", "Communication digitale", "Automatisation simple", "Accompagnement individuel ou groupe"]
+      }
+    };
+
+    const zoneData = {
+      plateau: ["Plateau - image corporate", "Sites vitrines, dashboards, portfolios professionnels et supports de présentation pour cabinets, consultants et entreprises qui veulent une présence digitale crédible.", ["Sites web","Dashboard","Présentation","Devis rapide"]],
+      cocody: ["Cocody - marques premium", "Identité visuelle, communication, site vitrine et pages de lancement pour marques personnelles, écoles, cabinets et commerces haut de gamme.", ["Branding","Site vitrine","Social media","Formation"]],
+      marcory: ["Marcory - commerce et conversion", "Boutiques, restaurants et PME peuvent centraliser leurs messages, produits, commandes et demandes de devis avec une expérience claire.", ["E-commerce","WhatsApp","Catalogue","Relance"]],
+      abobo: ["Abobo - accessibilité digitale", "Solutions simples, rapides et professionnelles pour entrepreneurs, créateurs, jeunes marques et projets en croissance.", ["CV","Flyers","Formation","Site rapide"]]
+    };
+
+    const chatReplies = {
+      site: ["Je veux un site qui donne confiance.", "Parfait. On part sur une structure premium: accueil, services, preuves, carousels vidéo, contact WhatsApp et design responsive."],
+      whatsapp: ["Je reçois trop de messages WhatsApp.", "On peut installer un parcours de réponse: accueil, questions fréquentes, qualification, devis suggéré puis transfert vers vous."],
+      devis: ["Combien coûte un projet ?", "Le prix dépend du service et du niveau de détail. Envoyez votre besoin et Hassan Digital vous répond directement sur WhatsApp."]
+    };
+
+    const navLinks = document.querySelectorAll(".nav-link");
+    const navBox = document.getElementById("navLinks");
+    const menuBtn = document.getElementById("menuBtn");
+    const modal = document.getElementById("serviceModal");
+    const modalClose = document.getElementById("modalClose");
+
+    function scrollToId(id){
+      document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+      navBox.classList.remove("open");
+    }
+
+    document.querySelectorAll("[data-scroll]").forEach(btn => btn.addEventListener("click", () => scrollToId(btn.dataset.scroll)));
+    navLinks.forEach(btn => btn.addEventListener("click", () => scrollToId(btn.dataset.nav)));
+    menuBtn.addEventListener("click", () => navBox.classList.toggle("open"));
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          navLinks.forEach(btn => btn.classList.toggle("active", btn.dataset.nav === entry.target.id));
+        }
+      });
+    }, {threshold:.35});
+    ["accueil","services","chat","zones","contact"].forEach(id => sectionObserver.observe(document.getElementById(id)));
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    document.querySelectorAll(".service-card").forEach(card => {
+      card.addEventListener("pointermove", event => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", ((event.clientX - rect.left) / rect.width * 100).toFixed(1) + "%");
+        card.style.setProperty("--my", ((event.clientY - rect.top) / rect.height * 100).toFixed(1) + "%");
+      });
+      card.addEventListener("click", () => openService(card.dataset.service));
+    });
+
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting || entry.target.dataset.done) return;
+        entry.target.dataset.done = "1";
+        const value = Number(entry.target.dataset.count);
+        const suffix = entry.target.dataset.suffix || "";
+        let current = 0;
+        const tick = () => {
+          current += Math.max(1, value / 38);
+          if(current >= value){ entry.target.textContent = value + suffix; return; }
+          entry.target.textContent = Math.floor(current) + suffix;
+          requestAnimationFrame(tick);
+        };
+        tick();
+      });
+    }, {threshold:.5});
+    document.querySelectorAll("[data-count]").forEach(el => counterObserver.observe(el));
+
+    function openService(key){
+      const data = serviceData[key];
+      document.getElementById("modalTitle").textContent = data.title;
+      document.getElementById("modalIntro").textContent = data.intro;
+      document.getElementById("modalList").innerHTML = data.bullets.map(item => `<li><svg class="icon"><use href="#i-check"/></svg><span>${item}</span></li>`).join("");
+      document.getElementById("modalWhatsapp").href = "https://wa.me/2250715484049?text=" + encodeURIComponent("Bonjour Hassan Digital, je veux plus de détails sur: " + data.title);
+      modal.classList.add("open");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal(){
+      modal.classList.remove("open");
+      document.body.classList.remove("modal-open");
+    }
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", event => { if(event.target === modal) closeModal(); });
+    document.addEventListener("keydown", event => { if(event.key === "Escape") closeModal(); });
+
+    document.querySelectorAll(".pin").forEach(pin => {
+      pin.addEventListener("click", () => {
+        document.querySelectorAll(".pin").forEach(p => p.classList.remove("active"));
+        pin.classList.add("active");
+        const [title, text, tags] = zoneData[pin.dataset.zone];
+        document.getElementById("locationPanel").innerHTML = `<h3>${title}</h3><p>${text}</p><div class="location-tags">${tags.map(tag => `<span>${tag}</span>`).join("")}</div>`;
+      });
+    });
+
+    document.querySelectorAll(".quick").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const chatBody = document.getElementById("chatBody");
+        const [question, answer] = chatReplies[btn.dataset.chat];
+        chatBody.insertAdjacentHTML("beforeend", `<div class="bubble in">${question}</div><div class="bubble out typing"><i></i><i></i><i></i></div>`);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        setTimeout(() => {
+          chatBody.querySelector(".typing:last-child")?.remove();
+          chatBody.insertAdjacentHTML("beforeend", `<div class="bubble out">${answer}</div>`);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 700);
+      });
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const fname = document.getElementById("fname").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const service = document.getElementById("serviceSelect").value;
+      const message = document.getElementById("message").value.trim();
+      if(!fname || !phone){ showToast("Merci de renseigner votre prénom et WhatsApp."); return; }
+      const text = `Bonjour Hassan Digital !\n\nJe m'appelle ${fname}.\nMon WhatsApp: ${phone}\nService souhaité: ${service}\n\nProjet: ${message || "À préciser ensemble."}\n\nJe souhaite un devis.`;
+      showToast("Ouverture de WhatsApp");
+      window.open("https://wa.me/2250715484049?text=" + encodeURIComponent(text), "_blank");
+    });
+
+    function showToast(text){
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+  </script>
+</body>
+</html>
